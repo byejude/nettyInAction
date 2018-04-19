@@ -26,7 +26,7 @@ public class NioTimeServer implements Runnable {
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.socket().bind(new InetSocketAddress(port),1024);
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-            System.out.print("the time server is start "+port);
+            System.out.println("the time server is start "+port);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -96,9 +96,9 @@ public class NioTimeServer implements Runnable {
                     byte[] bytes = new byte[readBuffer.remaining()];
                     readBuffer.get(bytes);
                     String body = new String(bytes,"UTF-8");
-                    System.out.print("the server receive order :"+body);
+                    System.out.println("the server receive order :"+body);
                     String currentTime = "QUERY TIME".equalsIgnoreCase(body)?new Date(System.currentTimeMillis()).toString():"BAD OREDER";
-                    System.out.print("the server send:"+currentTime);
+                    System.out.println("the server send:"+currentTime);
                     doWrite(socketChannel,currentTime);
 
                 }else if(readBytes<0){
@@ -121,7 +121,7 @@ public class NioTimeServer implements Runnable {
             writeBuffer.flip();
             socketChannel.write(writeBuffer);
             if(!writeBuffer.hasRemaining()){
-                System.out.print("send to server sucessed");
+                System.out.println("send to server sucessed");
             }
         }
     }

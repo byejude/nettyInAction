@@ -14,7 +14,7 @@ public class TimeServer {
         NioTimeServer nioTimeServer = new NioTimeServer(port);
         String name = "NIO-timeServerThread-"+ ++index;
         new Thread(nioTimeServer,name).start();
-        System.out.print(name);
+        System.out.println(name);
 
     }
 }

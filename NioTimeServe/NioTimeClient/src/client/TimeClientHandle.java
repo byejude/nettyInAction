@@ -87,7 +87,10 @@ public class TimeClientHandle implements Runnable{
 
                 if (socketChannel.finishConnect()) {
                     socketChannel.register(selector, SelectionKey.OP_READ);
-                    doWrite(socketChannel);
+                    for (int i = 0;i<20;i++){
+                        doWrite(socketChannel);
+                    }
+
                 } else {
                     System.exit(1);
                 }
